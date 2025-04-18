@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "meu-app",
-    "slug": "meu-app",
+    "name": "meu-app_react-native",
+    "slug": "meu-app_react-native",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.jecds.meuapp"
     },
     "web": {
       "bundler": "metro",
@@ -36,6 +37,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "d13b29ce-9d01-4628-8bad-034b3b23806a"
+      }
     }
   }
 }
