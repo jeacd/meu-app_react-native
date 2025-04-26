@@ -43,7 +43,14 @@ export default function TabLayout() {
       <Tabs.Screen
         name="formula1"
         options={{
-          title: 'Fórmula 1',
+          title: 'Pilotos',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="list.dash" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="racesList"
+        options={{
+          title: 'Corridas',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="list.dash" color={color} />,
         }}
       />

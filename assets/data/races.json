@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1, "name": "Grande Prêmio da Itália", 
+        "circuit": "Autódromo Nacional de Monza", 
+        "winner": "Charles Leclerc" 
+    },
+    { 
+        "id": 2, 
+        "name": "Grande Prêmio do México", 
+        "circuit": "Autódromo Hermanos Rodríguez", 
+        "winner": "Carlos Sainz"
+    }
+  ]
+  
