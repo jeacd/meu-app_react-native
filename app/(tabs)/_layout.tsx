@@ -54,6 +54,13 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="list.dash" color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="teamsList"
+        options={{
+          title: 'Equipes',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="list.dash" color={color} />,
+        }}
+      />
     </Tabs>
   );
 }
