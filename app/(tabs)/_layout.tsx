@@ -44,14 +44,14 @@ export default function TabLayout() {
         name="formula1"
         options={{
           title: 'Pilotos',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="list.dash" color={color} />,
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="person.3.fill" color={color} />,
         }}
       />
       <Tabs.Screen
         name="racesList"
         options={{
           title: 'Corridas',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="list.dash" color={color} />,
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="trophy.fill" color={color} />,
         }}
       />
       <Tabs.Screen
