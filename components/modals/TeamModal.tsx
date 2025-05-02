@@ -1,19 +1,35 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Text, View, StyleSheet, TouchableOpacity, Modal, TextInput } from "react-native"
-
+import { ITeam } from "@/interfaces/ITeam"
 export type TeamModalProps = {
     visible: boolean
-    onAdd: (name: string, pilot1: string, pilot2: string) => void
+    onAdd: (name: string, pilot1: string, pilot2: string, id?: number) => void
     onCancel: () => void
+    team?: ITeam
 }
 
-export default function RaceModal({ visible, onAdd, onCancel }: TeamModalProps) {
+export default function RaceModal({ visible, onAdd, onCancel, team }: TeamModalProps) {
     const [name, setName] = useState('')
     const [pilot1, setPilot1] = useState('')
     const [pilot2, setPilot2] = useState('')
+    const [id, setId] = useState<number>(0)
+
+    useEffect(() => {
+        if (team) {
+            setName(team.name);
+            setPilot1(team.pilot1);
+            setPilot2(team.pilot2);
+            setId(team.id);
+        } else {
+            setName('');
+            setPilot1('');
+            setPilot2('');
+            setId(0);
+        }
+    }, [team]);
 
     return (
-        <Modal visible={visible} animationType='fade' transparent={true}>
+        <Modal visible={visible} animationType='fade' transparent={true} onRequestClose={() => {}}>
             <View style={styles.container}>
                 <View style={styles.modalContainer}>
                     <TextInput
@@ -39,12 +55,12 @@ export default function RaceModal({ visible, onAdd, onCancel }: TeamModalProps) 
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.buttonAdd} onPress={
                             () => {
-                                onAdd(name, pilot1, pilot2)
+                                onAdd(name, pilot1, pilot2, id)
                                 setName('')
                                 setPilot1('')
                                 setPilot2('')
                             }}>
-                            <Text style={styles.buttonText}>Add</Text>
+                            <Text style={styles.buttonText}>Salvar</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={styles.buttonCancel} onPress={
@@ -54,7 +70,7 @@ export default function RaceModal({ visible, onAdd, onCancel }: TeamModalProps) 
                                 setPilot1('')
                                 setPilot2('')
                             }}>
-                            <Text style={styles.buttonText}>Cancel</Text>
+                            <Text style={styles.buttonText}>Cancelar</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -88,12 +104,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     buttonAdd: {
-        backgroundColor: '#4CAF50',
+        backgroundColor: 'green',
         padding: 10,
         borderRadius: 5,
     },
     buttonCancel: {
-        backgroundColor: '#f44336',
+        backgroundColor: 'orange',
         padding: 10,
         borderRadius: 5,
     },

@@ -15,7 +15,8 @@ const MAPPING = {
   'chevron.right': 'chevron-right',
   'list.dash': 'list-alt',
   'trophy.fill': 'emoji-events',
-  'person.3.fill': 'groups-2'
+  'person.3.fill': 'groups-2',
+  'trash': 'delete-forever'
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],

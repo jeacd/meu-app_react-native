@@ -1,37 +1,54 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Text, View, StyleSheet, TouchableOpacity, Modal, TextInput } from "react-native"
+import { IRace } from '@/interfaces/IRace'
 
 export type RaceModalProps = {
     visible: boolean
-    onAdd: (name: string, circuit: string, winner: string) => void
+    onAdd: (name: string, circuit: string, winner: string, id: number) => void
     onCancel: () => void
+    race: IRace | undefined
 }
 
-export default function RaceModal({ visible, onAdd, onCancel }: RaceModalProps) {
+export default function RaceModal({ visible, onAdd, onCancel, race }: RaceModalProps) {
     const [name, setName] = useState('')
     const [circuit, setCircuit] = useState('')
     const [winner, setWinner] = useState('')
+    const [id, setId] = useState<number>(0)
+
+    useEffect(() => {
+        if (race) {
+            setName(race.name);
+            setCircuit(race.circuit);
+            setWinner(race.winner);
+            setId(race.id);
+        } else {
+            setName('');
+            setCircuit('');
+            setWinner('');
+            setId(0);
+        }
+    }, [race]);
 
     return (
-        <Modal visible={visible} animationType='fade' transparent={true}>
+        <Modal visible={visible} animationType="fade" transparent={true} onRequestClose={() => { }}>
             <View style={styles.container}>
                 <View style={styles.modalContainer}>
                     <TextInput
                         style={styles.boxInput}
-                        placeholder='Nome'
+                        placeholder='Nome do piloto'
                         value={name}
                         onChangeText={setName}
                         autoFocus
                     />
                     <TextInput
                         style={styles.boxInput}
-                        placeholder='Circuito'
+                        placeholder='Nome do circuito'
                         value={circuit}
                         onChangeText={setCircuit}
                     />
                     <TextInput
                         style={styles.boxInput}
-                        placeholder='Vencedor'
+                        placeholder='Nome do vencedor'
                         value={winner}
                         onChangeText={setWinner}
                     />
@@ -39,12 +56,12 @@ export default function RaceModal({ visible, onAdd, onCancel }: RaceModalProps) 
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.buttonAdd} onPress={
                             () => {
-                                onAdd(name, circuit, winner)
+                                onAdd(name, circuit, winner, id)
                                 setName('')
                                 setCircuit('')
                                 setWinner('')
                             }}>
-                            <Text style={styles.buttonText}>Add</Text>
+                            <Text style={styles.buttonText}>Salvar</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={styles.buttonCancel} onPress={
@@ -54,7 +71,7 @@ export default function RaceModal({ visible, onAdd, onCancel }: RaceModalProps) 
                                 setCircuit('')
                                 setWinner('')
                             }}>
-                            <Text style={styles.buttonText}>Cancel</Text>
+                            <Text style={styles.buttonText}>Cancelar</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -88,12 +105,17 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     buttonAdd: {
-        backgroundColor: '#4CAF50',
+        backgroundColor: 'green',
+        padding: 10,
+        borderRadius: 5,
+    },
+    buttonDelete: {
+        backgroundColor: 'red',
         padding: 10,
         borderRadius: 5,
     },
     buttonCancel: {
-        backgroundColor: '#f44336',
+        backgroundColor: 'orange',
         padding: 10,
         borderRadius: 5,
     },
