@@ -43,7 +43,7 @@ export default function InsertRace({ onAdd, onCancel, race }: InsertRaceProps) {
                 <View style={styles.contentContainer}>
                     <TextInput
                         style={styles.boxInput}
-                        placeholder='Nome do piloto'
+                        placeholder='Nome da corrida'
                         value={name}
                         onChangeText={setName}
                     />
