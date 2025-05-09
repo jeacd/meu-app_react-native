@@ -35,7 +35,7 @@ export default function RaceModal({ visible, onAdd, onCancel, race }: RaceModalP
                 <View style={styles.modalContainer}>
                     <TextInput
                         style={styles.boxInput}
-                        placeholder='Nome do piloto'
+                        placeholder='Nome da corrida'
                         value={name}
                         onChangeText={setName}
                         autoFocus

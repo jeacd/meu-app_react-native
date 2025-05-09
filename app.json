@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "meu-app_react-native",
-    "slug": "meu-app_react-native",
+    "name": "meu-app",
+    "slug": "meu-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

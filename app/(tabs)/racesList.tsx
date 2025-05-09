@@ -5,16 +5,53 @@ import Race from '@/components/race/Race'
 import { useState, useEffect } from 'react'
 import { IRace } from '@/interfaces/IRace'
 import RaceModal from '@/components/modals/RaceModal'
-import raceData from '@/assets/data/races.json'
+import { ThemedText } from '@/components/ThemedText'
+
+import * as Location from 'expo-location'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function RacesList() {
     const [races, setRaces] = useState<IRace[]>([])
     const [modalVisible, setModalVisible] = useState<boolean>(false)
     const [selectedRace, setSelectedRace] = useState<IRace | undefined>(undefined)
 
+
+    const [location, setLocation] = useState<Location.LocationObject | null>(null);
+    const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
     useEffect(() => {
-        setRaces(raceData);
+        async function getCurrentLocation() {
+      
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+              setErrorMsg('Permission to access location was denied');
+              return;
+            }
+      
+            let location = await Location.getCurrentPositionAsync({});
+            setLocation(location);
+        }
+            getCurrentLocation();
     }, []);
+
+    let text = 'Aguardando...';
+    if (errorMsg) {
+        text = errorMsg;
+    } else if (location) {
+        text = JSON.stringify(location);
+    }
+
+    useEffect(() => {
+        async function getData() {
+            try {
+                const data = await AsyncStorage.getItem('@Formula1App:races')
+                const racesData = data != null ? JSON.parse(data) : []
+                setRaces(racesData)
+            } catch (e) {
+            }
+        }
+        getData()
+    }, [])
 
     const onAdd = (name: string, circuit: string, winner: string, id?: number) => {
         if (!id || id <= 0) {
@@ -24,7 +61,9 @@ export default function RacesList() {
                 circuit,
                 winner
             }
-            setRaces([...races, newRace])
+            const updatedRaces = [...races, newRace];
+            setRaces(updatedRaces);
+            AsyncStorage.setItem('@Formula1App:races', JSON.stringify(updatedRaces));
         }
         else {
             races.forEach(race => {
@@ -34,6 +73,7 @@ export default function RacesList() {
                     race.winner = winner
                 }
             })
+            AsyncStorage.setItem('@Formula1App:races', JSON.stringify(races))
         }
         setModalVisible(false)
     }
@@ -41,6 +81,7 @@ export default function RacesList() {
     const onDelete = (id: number) => {
         const newRaces = races.filter(race => race.id !== id)
         setRaces(newRaces)
+        AsyncStorage.setItem('@Formula1App:races', JSON.stringify(newRaces))
         setModalVisible(false)
     }
 
@@ -60,6 +101,7 @@ export default function RacesList() {
     return (
         <ParallaxScrollView headerBackgroundColor={{ light: '#ECECEC', dark: '#202020' }}>
             <ThemedView style={styles.headerContainer}>
+                <ThemedText>{text}</ThemedText>
                 <TouchableOpacity onPress={() => openModal()}>
                     <Text style={styles.headerButton}>+</Text>
                 </TouchableOpacity>
