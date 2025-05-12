@@ -16,7 +16,8 @@ const MAPPING = {
   'list.dash': 'list-alt',
   'trophy.fill': 'emoji-events',
   'person.3.fill': 'groups-2',
-  'trash': 'delete-forever'
+  'trash': 'delete-forever',
+  'person': 'person-pin'
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],

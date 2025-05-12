@@ -62,6 +62,13 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="userList"
+        options={{
+          title: 'Usuários',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="person" color={color} />,
+        }}
+      />
+      <Tabs.Screen
         name="insertRace"
         options={{
           title: 'Inserir Corrida',
