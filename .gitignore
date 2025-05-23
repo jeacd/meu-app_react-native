@@ -36,3 +36,8 @@ yarn-error.*
 *.tsbuildinfo
 
 app-example
+
+insertRace.1.tsx
+insertTeam.1.tsx
+racesList.1.tsx
+teamsList.1.tsx

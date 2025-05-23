@@ -26,7 +26,7 @@ export default function TabLayout() {
           default: {},
         }),
       }}>
-      {/* <Tabs.Screen
+      <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
@@ -39,7 +39,7 @@ export default function TabLayout() {
           title: 'Explore',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
         }}
-      /> */}
+      />
       <Tabs.Screen
         name="formula1"
         options={{
@@ -66,20 +66,6 @@ export default function TabLayout() {
         options={{
           title: 'Usuários',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="person" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="insertRace"
-        options={{
-          title: 'Inserir Corrida',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="trophy.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="insertTeam"
-        options={{
-          title: 'Inserir Equipe',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="list.dash" color={color} />,
         }}
       />
     </Tabs>
